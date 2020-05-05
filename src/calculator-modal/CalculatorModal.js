@@ -25,18 +25,18 @@ class CalculatorModal extends React.Component {
             <Button color="grayDark" text="7" />
             <Button color="grayDark" text="8" />
             <Button color="grayDark" text="9" />
-            <Button color="blueSky" text="✖" />
+            <Button color="blueSky" text="&times;" />
             <Button color="grayDark" text="4" />
             <Button color="grayDark" text="5" />
             <Button color="grayDark" text="6" />
-            <Button color="blueSky" text="－" />
+            <Button color="blueSky" text="-" />
             <Button color="grayDark" text="1" />
             <Button color="grayDark" text="2" />
             <Button color="grayDark" text="3" />
-            <Button color="blueSky" text="＋" />
+            <Button color="blueSky" text="+" />
             <Button color="grayDark" text="0" size="2" />
             <Button color="grayDark" text="." />
-            <Button color="blueSky" text="＝" />
+            <Button color="blueSky" text="=" />
           </div>
         </div>
       </div>

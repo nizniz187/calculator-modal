@@ -38,11 +38,20 @@
 .calc-modal-btn.btn-color-gray > button {
   color: black; background-color: #AFAFAF;
 }
+.calc-modal-btn.btn-color-gray > button:active {
+  background-color: #BBB;
+}
 .calc-modal-btn.btn-color-grayDark > button {
   color: white; background-color: #333;
 }
+.calc-modal-btn.btn-color-grayDark > button:active {
+  background-color: #555;
+}
 .calc-modal-btn.btn-color-blueSky > button {
   color: white; background-color: #3091FD;
+}
+.calc-modal-btn.btn-color-blueSky > button:active {
+  background-color: rgb(91, 167, 253);
 }
 
 @media screen and (max-width: 768px) {
