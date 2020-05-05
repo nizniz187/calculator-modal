@@ -14,45 +14,32 @@ class CalculatorModal extends React.Component {
 
   render() {
     return (
-      <div className={`calc-modal ${this.displayClassName}`}>
-        <div className="calc-modal-ctn">
-          <div className="calc-modal-input">{this.state.input}</div>
-          <div className="calc-modal-ctrl">            
-            <Button color="gray" text="AC" />
-            <Button color="gray" text="+/-" />
-            <Button color="gray" text="%" />
-            <Button color="blueSky" text="÷" />
-            <Button color="grayDark" text="7" />
-            <Button color="grayDark" text="8" />
-            <Button color="grayDark" text="9" />
-            <Button color="blueSky" text="&times;" />
-            <Button color="grayDark" text="4" />
-            <Button color="grayDark" text="5" />
-            <Button color="grayDark" text="6" />
-            <Button color="blueSky" text="-" />
-            <Button color="grayDark" text="1" />
-            <Button color="grayDark" text="2" />
-            <Button color="grayDark" text="3" />
-            <Button color="blueSky" text="+" />
-            <Button color="grayDark" text="0" size="2" />
-            <Button color="grayDark" text="." />
-            <Button color="blueSky" text="=" />
-          </div>
+      <div className="calc-modal">
+        <div className="calc-modal-input">{this.state.input}</div>
+        <div className="calc-modal-ctrl">            
+          <Button color="gray" text="AC" />
+          <Button color="gray" text="+/-" />
+          <Button color="gray" text="%" />
+          <Button color="blueSky" text="÷" />
+          <Button color="grayDark" text="7" />
+          <Button color="grayDark" text="8" />
+          <Button color="grayDark" text="9" />
+          <Button color="blueSky" text="&times;" />
+          <Button color="grayDark" text="4" />
+          <Button color="grayDark" text="5" />
+          <Button color="grayDark" text="6" />
+          <Button color="blueSky" text="-" />
+          <Button color="grayDark" text="1" />
+          <Button color="grayDark" text="2" />
+          <Button color="grayDark" text="3" />
+          <Button color="blueSky" text="+" />
+          <Button color="grayDark" text="0" size="2" />
+          <Button color="grayDark" text="." />
+          <Button color="blueSky" text="=" />
         </div>
       </div>
     );
   }
-
-  get displayClassName() { 
-    if(this.props.show === true) {
-      return DISPLAY_CLASS_NAME_SHOW;
-    } else {
-      return DISPLAY_CLASS_NAME_HIDE;
-    }
-  }
 }
-
-const DISPLAY_CLASS_NAME_SHOW = 'show';
-const DISPLAY_CLASS_NAME_HIDE = '';
 
 export default CalculatorModal;

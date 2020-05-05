@@ -1,16 +1,13 @@
 .calc-modal {
-  position: fixed; top: 0; left: 0; z-index: 9999;
-  width: 100vw; height: 100vh;
-  user-select: none;
-}
-.calc-modal * { box-sizing: border-box; }
-.calc-modal-ctn {
   background: linear-gradient(180deg, #84BAFF 0%, #0B0E1C 100%);
   box-shadow: 0px 0px 5px 2px rgba(179,179,179,1);
   padding: 10px; padding-top: 50px;
   position: relative; top: calc(50vh - 240px); left: calc(50vw - 240px);
+  user-select: none;
   width: 480px;
+  z-index: 9999;
 }
+.calc-modal * { box-sizing: border-box; }
 .calc-modal-input {
   color: white;
   font-size: 60px;

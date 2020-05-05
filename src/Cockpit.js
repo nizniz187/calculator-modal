@@ -1,5 +1,6 @@
 import React from 'react';
 import Calculator from './calculator-modal/CalculatorModal.js';
+import './cockpit.css';
 
 class Cockpit extends React.Component {
   constructor(props) {
@@ -12,16 +13,32 @@ class Cockpit extends React.Component {
     return (
       <div>
         <button type="button" onClick={this.showCalculator}>Calculator</button>
-        <Calculator show={this.state.isCalculatorShow} />
+        {this.renderCalculator()}
       </div>
     );
   }
+  renderCalculator() {
+    if(this.state.isCalculatorShow === true) {
+      return (
+        <div className={MASK_CLASS_NAME} onClick={this.hideCalculator}>
+          <Calculator show={this.state.isCalculatorShow} />
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
 
+  hideCalculator = e => {
+    if(e.target.className === MASK_CLASS_NAME) {
+      this.setState(() => ({ isCalculatorShow: false }));
+    }
+  }
   showCalculator = () => {
-    this.setState((state, props) => {
-      return { isCalculatorShow: true };
-    });
+    this.setState(() => ({ isCalculatorShow: true }));
   };
 }
+
+const MASK_CLASS_NAME = 'calculator-mask';
 
 export default Cockpit;
