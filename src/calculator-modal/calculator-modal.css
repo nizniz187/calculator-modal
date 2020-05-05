@@ -1,13 +1,17 @@
+.calc-modal, .calc-modal * { box-sizing: border-box; }
 .calc-modal {
   background: linear-gradient(180deg, #84BAFF 0%, #0B0E1C 100%);
-  box-shadow: 0px 0px 5px 2px rgba(179,179,179,1);
+  box-shadow: 0px 0px 5px 3px rgba(179,179,179,1);
   padding: 10px; padding-top: 50px;
   position: relative; top: calc(50vh - 240px); left: calc(50vw - 240px);
   user-select: none;
   width: 480px;
   z-index: 9999;
 }
-.calc-modal * { box-sizing: border-box; }
+.calc-modal-ctn {
+  margin: 0 auto;
+  width: 240px;
+}
 .calc-modal-input {
   color: white;
   font-size: 60px;
@@ -16,6 +20,7 @@
   width: 100%;
 }
 .calc-modal-ctrl {
+  margin: 0 auto;
   width: 100%;
 }
 .calc-modal-btn {
@@ -30,7 +35,7 @@
   font-size: 26px;
   text-align: center; line-height: 50px;
   outline: none;
-  width: 100%; height: 50px;
+  width: 100%; min-width: 50px; height: 50px;
 }
 .calc-modal-btn.btn-color-gray > button {
   color: black; background-color: #AFAFAF;
@@ -52,12 +57,15 @@
 }
 
 @media screen and (max-width: 768px) {
-  .calc-modal-ctn { width: 360px; }
+  .calc-modal {
+    left: calc(50vw - 180px);
+    width: 360px; 
+  }
 }
 @media screen and (max-width: 425px) {
-  .calc-modal-ctn { 
+  .calc-modal { 
     width: 100%; max-height: 50vh; 
-    overflow-y: auto;
+    overflow: auto;
     top: 50vh; left: 0;
   }
 }

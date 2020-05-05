@@ -6,7 +6,7 @@ class Cockpit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCalculatorShow: false
+      isCalculatorShow: true
     }
   }
   render() {
