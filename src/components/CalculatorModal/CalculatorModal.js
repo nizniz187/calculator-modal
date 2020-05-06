@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './CalculatorButton.js';
-import './calculator-modal.css';
+import './CalculatorModal.css';
 
 class CalculatorModal extends React.Component {
   constructor(props) {
