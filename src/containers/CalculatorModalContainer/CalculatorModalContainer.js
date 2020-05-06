@@ -8,14 +8,17 @@ class CalculatorModalContainer extends React.Component {
     this.state = {
       isCalculatorShow: true,
       input: '0',
+      result: 0,
+      arithmetic: null
     }
   }
   render() {
     if(this.state.isCalculatorShow === true) {
       return (
-        <div className={MASK_CLASS_NAME} onClick={this.hideCalculator}>
+        <div className={MASK_CLASS_NAME}>
           <CalculatorModal 
             show={this.state.isCalculatorShow}
+            input={this.state.input}
             addInputHandler={this.addInput}
             resetHandler={this.reset}
             convertSignHandler={this.convertSign}
@@ -30,22 +33,32 @@ class CalculatorModalContainer extends React.Component {
     }
   }
 
-  addInputHandler = input => {
-    
+  addInput = (input = '') => {
+    this.setState(state => {
+      if(state.input.length >= 7) { return state; }
+      if(input === '.' && state.input.includes('.')) { return state; }
+      if(state.input === '0' && input !== '.') { return { input: input }; }
+
+      return { input: state.input += input };
+    });
   };
-  resetHandler = () => {
+  reset = () => {
+    this.setState(() => {
+      return { 
+        input: '0', result: 0
+      };
+    });
+  };
+  convertSign = () => {
 
   };
-  convertSignHandler = () => {
+  convertPercentage = () => {
 
   };
-  convertPercentageHandler = () => {
+  changeArithmetic = () => {
 
   };
-  changeArithmeticHandler = () => {
-
-  };
-  showResultHandler = () => {
+  showResult = () => {
 
   };
   hideCalculator = e => {

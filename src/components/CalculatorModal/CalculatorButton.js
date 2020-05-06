@@ -4,12 +4,18 @@ class CalculatorButton extends React.Component {
   render() {
     return (
       <div className={`calc-modal-btn ${this.sizeClassName} ${this.colorClassName}`}>
-        <button onClick={this.props.clickHandler}>
+        <button onClick={this.clickHandler}>
           {this.props.text}
         </button>
       </div>
     );
   }
+
+  clickHandler = () => {
+    if(typeof this.props.clickHandler === 'function') {
+      this.props.clickHandler(this.props.text);
+    }
+  };
 
   get colorClassName() { return `btn-color-${this.props.color}`; }
   get sizeClassName() {

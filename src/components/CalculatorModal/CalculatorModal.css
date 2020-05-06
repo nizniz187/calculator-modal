@@ -15,6 +15,7 @@
 .calc-modal-input {
   color: white;
   font-size: 60px;
+  overflow: hidden;
   padding: 5px;
   text-align: right;
   width: 100%;
