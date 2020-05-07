@@ -26,6 +26,8 @@ const reducer = (state = initialState, action) => {
       return initialState;
     case ACTION_TYPES.CONVERT_SIGN:
       return convertSignReducer(state);
+    case ACTION_TYPES.CONVERT_PERCENTAGE:
+      return convertPercentageReducer(state);
   }
   return state;
 };
@@ -57,6 +59,10 @@ function convertSignReducer(state) {
   } else {
     return { ...state, input: '-' + state.input };
   }
+};
+/* todo */
+function convertPercentageReducer(state) {
+  return state;
 };
 
 function showResultReducer(state, result, arithmetic) {

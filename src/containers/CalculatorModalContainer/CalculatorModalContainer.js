@@ -23,6 +23,7 @@ class CalculatorModalContainer extends React.Component {
           onInput={this.props.onInput}
           onReset={this.props.onReset}
           onConvertSign={this.props.onConvertSign}
+          onConvertPercentage={this.props.onConvertPercentage}
           onAdd={this.props.onAdd}
           onSubtract={this.props.onSubtract}
           onMultiply={this.props.onMultiply}
@@ -71,6 +72,7 @@ const mapDispatchToProps = dispatch => {
     onInput: input => { dispatch({ type: ACTION_TYPES.ADD_INPUT, input }) },
     onReset: () => dispatch({ type: ACTION_TYPES.RESET }),
     onConvertSign: () => dispatch({ type: ACTION_TYPES.CONVERT_SIGN }),
+    onConvertPercentage: () => dispatch({ type: ACTION_TYPES.CONVERT_PERCENTAGE }),
     onAdd: () => dispatch({ type: ACTION_TYPES.ADD }),
     onSubtract: () => dispatch({ type: ACTION_TYPES.SUBTRACT }),
     onMultiply: () => dispatch({ type: ACTION_TYPES.MULTIPLY }),
