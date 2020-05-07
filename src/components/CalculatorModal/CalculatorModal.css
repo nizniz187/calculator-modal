@@ -1,16 +1,17 @@
+.calc-modal-mask {
+  position: fixed; left: 0; top: 0;
+  width: 100vw; height: 100vh;
+}
+
 .calc-modal, .calc-modal * { box-sizing: border-box; }
 .calc-modal {
   background: linear-gradient(180deg, #84BAFF 0%, #0B0E1C 100%);
   box-shadow: 0px 0px 5px 3px rgba(179,179,179,1);
   padding: 10px; padding-top: 50px;
-  position: relative; top: calc(50vh - 240px); left: calc(50vw - 240px);
+  position: fixed; top: calc(50vh - 240px); left: calc(50vw - 240px);
   user-select: none;
-  width: 480px;
+  width: 480px; max-height: 100vh;
   z-index: 9999;
-}
-.calc-modal-mask {
-  position: fixed; left: 0; top: 0;
-  width: 100vw; height: 100vh;
 }
 .calc-modal-ctn {
   margin: 0 auto;

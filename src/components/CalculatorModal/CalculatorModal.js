@@ -7,7 +7,9 @@ import './CalculatorModal.css';
 class CalculatorModal extends React.Component {
   render() {
     return (
-      <div className="calc-modal-mask">
+      <div>
+        <div className="calc-modal-mask">
+        </div>
         <div className="calc-modal">
           <div className="calc-modal-ctn">
             <div className="calc-modal-display">{this.props.display}</div>
