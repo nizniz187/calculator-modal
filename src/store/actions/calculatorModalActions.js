@@ -12,3 +12,6 @@ export const WINDOW_RESIZE = 'WINDOW_RESIZE';
 export const MOVE_START = 'MOVE_START';
 export const MOVE = 'MOVE';
 export const MOVE_END = 'MOVE_END';
+
+export const SHOW = 'SHOW';
+export const HIDE = 'HIDE';
