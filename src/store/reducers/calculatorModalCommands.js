@@ -68,18 +68,24 @@ function showResultReducer(state, result, arithmetic) {
 function executeArithmetic(arithmeticType, input1, input2) {
   input1 = new BigNumber(input1);
   input2 = new BigNumber(input2);
+  let result = null;
   switch(arithmeticType) {
     case ACTION_TYPES.ADD:
-      return input1.plus(input2);
+      result = input1.plus(input2);
+      break;
     case ACTION_TYPES.SUBTRACT:
-      return input1.minus(input2);
+      result = input1.minus(input2);
+      break;
     case ACTION_TYPES.MULTIPLY:
-      return input1.multipliedBy(input2);
+      result = input1.multipliedBy(input2);
+      break;
     case ACTION_TYPES.DIVIDE:
-      return input1.dividedBy(input2);
+      result = input1.dividedBy(input2);
+      break;
     default:
-      return input2;
+      result = input2;
   }
+  return result;
 }
 
 export default reducer;

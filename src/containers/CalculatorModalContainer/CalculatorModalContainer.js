@@ -8,7 +8,7 @@ class CalculatorModalContainer extends React.Component {
   render() {
     return (
       <CalculatorModal 
-        display={this.props.display}
+        display={this.formattedDisplay}
         onInput={this.props.onInput}
         onReset={this.props.onReset}
         onConvertSign={this.props.onConvertSign}
@@ -19,6 +19,12 @@ class CalculatorModalContainer extends React.Component {
         onEqual={this.props.onEqual}
       />
     );
+  }
+
+  get formattedDisplay() { 
+    if(this.props.display.length >= 7) { return this.props.display.substring(0, 7); }
+    
+    return this.props.display;
   }
 }
 
