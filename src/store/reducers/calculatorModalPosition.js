@@ -11,9 +11,9 @@ const reducer = (state = initialState, action) => {
     case ACTION_TYPES.WINDOW_RESIZE:
       return windowResizeReducer(state, action.breakPoint);
     case ACTION_TYPES.MOVE_START:
-      return moveStartReducer(state, action.mousePosition, action.modalPosition);
+      return moveStartReducer(state, action.userPosition, action.modalPosition);
     case ACTION_TYPES.MOVE:
-      return moveReducer(state, action.mousePosition);
+      return moveReducer(state, action.userPosition);
     case ACTION_TYPES.MOVE_END:
       return moveEndReducer(state);
   }
@@ -27,25 +27,25 @@ function windowResizeReducer(state, breakPoint) {
     return state;
   }
 }
-function moveStartReducer(state, mousePosition, modalPosition) {
-  if(!mousePosition || typeof mousePosition !== 'object') { return state; }
+function moveStartReducer(state, userPosition, modalPosition) {
+  if(!userPosition || typeof userPosition !== 'object') { return state; }
   if(!modalPosition || typeof modalPosition !== 'object') { return state; }
 
   return {
     ...state,
-    offsetX: mousePosition.x - modalPosition.x,
-    offsetY: mousePosition.y - modalPosition.y,
+    offsetX: userPosition.x - modalPosition.x,
+    offsetY: userPosition.y - modalPosition.y,
     isMoving: true
   };
 }
-function moveReducer(state, mousePosition) {
+function moveReducer(state, userPosition) {
   if(state.isMovable !== true || state.isMoving !== true) { return state; }
-  if(!mousePosition || typeof mousePosition !== 'object') { return state; }
+  if(!userPosition || typeof userPosition !== 'object') { return state; }
   
   return {
     ...state,
-    x: mousePosition.x - state.offsetX,
-    y: mousePosition.y - state.offsetY
+    x: userPosition.x - state.offsetX,
+    y: userPosition.y - state.offsetY
   };
 }
 function moveEndReducer(state) {

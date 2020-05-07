@@ -9,10 +9,15 @@ class CalculatorModal extends React.Component {
     return (
       <div id={this.props.maskId} className="calc-modal-mask"
         onClick={this.props.onMaskClick}
-        onMouseMove={this.getMoveHandler(this.props.onMouseMove)}
-        onMouseUp={this.getMoveHandler(this.props.onMouseUp)}>
+        onMouseMove={this.getMoveHandler(this.props.onMove)}
+        onMouseUp={this.getMoveHandler(this.props.onMoveEnd)}    
+        onTouchMove={this.getMoveHandler(this.props.onMove)}
+        onTouchEnd={this.getMoveHandler(this.props.onMoveEnd)}
+        onTouchCancel={this.getMoveHandler(this.props.onMoveEnd)}>
         <div id={this.props.modalId} className="calc-modal" style={this.positionStyles}
-          onMouseDown={this.getMoveHandler(this.props.onMouseDown)}>
+          onMouseDown={this.getMoveHandler(this.props.onMoveStart)}    
+          onTouchStart={this.getMoveHandler(this.props.onMoveStart)}
+          onContextMenu={this.preventContextMenu}>
           <div className="calc-modal-ctn">
             <div className="calc-modal-display">{this.props.display}</div>
             <div className="calc-modal-ctrl">            
@@ -41,6 +46,7 @@ class CalculatorModal extends React.Component {
       </div>
     );
   }
+  preventContextMenu = e => { e.preventDefault(); }
 
   getMoveHandler(handler) {
     if(this.props.isMovable === true) { return handler; }

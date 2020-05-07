@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CalculatorModal from 'components/CalculatorModal.js';
+import CalculatorModal from 'components/CalculatorModal/CalculatorModal.js';
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions.js';
 
 class CalculatorModalContainer extends React.Component {
@@ -15,9 +15,9 @@ class CalculatorModalContainer extends React.Component {
 
           isMovable={this.props.isMovable}
           position={this.props.position}
-          onMouseDown={this.props.onMoveStart}
-          onMouseMove={this.props.onMove}
-          onMouseUp={this.props.onMoveEnd}
+          onMoveStart={this.props.onMoveStart}
+          onMove={this.props.onMove}
+          onMoveEnd={this.props.onMoveEnd}
 
           display={this.formattedDisplay}
           onInput={this.props.onInput}
@@ -87,18 +87,25 @@ const mapDispatchToProps = dispatch => {
     onMoveStart: e => {
       dispatch({ 
         type: ACTION_TYPES.MOVE_START, 
-        mousePosition: { x: e.clientX, y: e.clientY},
+        userPosition: getUserPosition(e),
         modalPosition: { x: e.currentTarget.offsetLeft, y: e.currentTarget.offsetTop }
       });
     },
     onMove: e => {
       dispatch({ 
         type: ACTION_TYPES.MOVE, 
-        mousePosition: { x: e.clientX, y: e.clientY}
+        userPosition: getUserPosition(e)
       });
     },
-    onMoveEnd: () => dispatch({ type: ACTION_TYPES.MOVE_END }),
+    onMoveEnd: () => dispatch({ type: ACTION_TYPES.MOVE_END })
   };
+}
+const getUserPosition = e => {
+  if(e.changedTouches instanceof TouchList && e.changedTouches.length > 0) {
+    return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+  } else {
+    return { x: e.clientX, y: e.clientY };
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalculatorModalContainer);
