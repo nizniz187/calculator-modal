@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js';
+
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions';
 
 const initialState = {
@@ -58,23 +60,23 @@ function convertSignReducer(state) {
 };
 
 function showResultReducer(state, result, arithmetic) {
-  if(state.newInput === true) { return state; }
- 
+  if(state.newInput === true) { return {...state, arithmetic}; }
+  console.log({ input: `${result}`, result: `${result}`, newInput: true, arithmetic })
   return { input: `${result}`, result: `${result}`, newInput: true, arithmetic };
 };
 
 function executeArithmetic(arithmeticType, input1, input2) {
-  input1 = Number(input1);
-  input2 = Number(input2);
+  input1 = new BigNumber(input1);
+  input2 = new BigNumber(input2);
   switch(arithmeticType) {
     case ACTION_TYPES.ADD:
-      return input1 + input2;
+      return input1.plus(input2);
     case ACTION_TYPES.SUBTRACT:
-      return input1 - input2;
+      return input1.minus(input2);
     case ACTION_TYPES.MULTIPLY:
-      return input1 * input2;
+      return input1.multipliedBy(input2);
     case ACTION_TYPES.DIVIDE:
-      return input1 / input2;
+      return input1.dividedBy(input2);
     default:
       return input2;
   }
