@@ -31,3 +31,8 @@
 .calc-btn-color-blueSky > button:active {
   background-color: rgb(91, 167, 253);
 }
+
+.calc-btn-text-align-left > button {
+  text-align: left;
+  padding-left: 18px;
+}

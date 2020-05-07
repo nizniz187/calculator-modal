@@ -32,7 +32,7 @@ class CalculatorModal extends React.Component {
               <Button color="grayDark" text={BUTTON_TEXT.INPUT_2} onClick={this.props.onInput} />
               <Button color="grayDark" text={BUTTON_TEXT.INPUT_3} onClick={this.props.onInput} />
               <Button color="blueSky" text={BUTTON_TEXT.COMMAND_ADD} onClick={this.props.onAdd} />
-              <Button color="grayDark" text={BUTTON_TEXT.INPUT_0} size="2" onClick={this.props.onInput} />
+              <Button color="grayDark" text={BUTTON_TEXT.INPUT_0} size="2" textAlign='left' onClick={this.props.onInput} />
               <Button color="grayDark" text={BUTTON_TEXT.INPUT_DOT} onClick={this.props.onInput} />
               <Button color="blueSky" text={BUTTON_TEXT.COMMAND_EQUAL} onClick={this.props.onEqual} />
             </div>

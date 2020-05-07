@@ -6,8 +6,7 @@ const initialState = {
   isNewInput: true,
   input: '0',
   result: '0',
-  arithmetic: null,
-  percentage: null
+  arithmetic: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -63,7 +62,7 @@ function convertSignReducer(state) {
 function convertPercentageReducer(state) {
   let percentage = executeArithmetic(ACTION_TYPES.DIVIDE, state.input, 100);
   let result = executeArithmetic(ACTION_TYPES.MULTIPLY, state.result, percentage);
-  return { ...state, input: `${result}`, percentage: state.input }
+  return { ...state, input: `${result}` }
 }
 function showResultReducer(state, result, arithmetic) {
   if(state.isNewInput === true) {
