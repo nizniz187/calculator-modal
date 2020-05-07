@@ -60,8 +60,8 @@ function convertSignReducer(state) {
 };
 
 function showResultReducer(state, result, arithmetic) {
-  if(state.newInput === true) { return {...state, arithmetic}; }
-  console.log({ input: `${result}`, result: `${result}`, newInput: true, arithmetic })
+  if(state.newInput === true) { return {...state, result: state.input, arithmetic}; }
+
   return { input: `${result}`, result: `${result}`, newInput: true, arithmetic };
 };
 
