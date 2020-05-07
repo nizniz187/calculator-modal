@@ -1,122 +1,43 @@
 import React from 'react';
-import CalculatorModal, { COMMAND_TEXT } from 'components/CalculatorModal/CalculatorModal.js';
-import './CalculatorModalContainer.css';
+import { connect } from 'react-redux';
+
+import CalculatorModal from 'components/CalculatorModal/CalculatorModal.js';
+import * as ACTION_TYPES from 'store/actions/calculatorModalActions.js';
 
 class CalculatorModalContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCalculatorShow: true,
-      newInput: true,
-      input: '0',
-      result: '0',
-      command: null
-    };
-  }
   render() {
-    if(this.state.isCalculatorShow === true) {
-      return (
-        <div className={MASK_CLASS_NAME}>
-          <CalculatorModal 
-            show={this.state.isCalculatorShow}
-            input={this.state.input}
-            addInputHandler={this.addInput}
-            resetHandler={this.reset}
-            convertSignHandler={this.convertSign}
-            convertPercentageHandler={this.convertPercentage}
-            showResultHandler={this.showResult}
-          />
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-
-  addInput = (input = '') => {
-    this.setState(state => {
-      if(state.newInput === true) { 
-        if(input === '.') { return { input: '0.', newInput: false }; }
-        else { return { input: input, newInput: false }; }
-      }
-
-      if(state.input.length >= 7) { return state; }
-      if(input === '.' && state.input.includes('.')) { return state; }
-      if(state.input === '0' && input !== '.') { return { input: input }; }
-
-      return { input: state.input += input };
-    });
-  };
-  reset = () => {
-    this.setState(() => {
-      return {
-        newInput: true,
-        input: '0',
-        result: '0',
-        command: null
-      };
-    });
-  };
-  convertSign = () => {
-    this.setState(state => {
-      if(state.input === '0') { return state; }
-
-      if(state.input.includes('-')) {
-        return { input: state.input.replace('-', '') };
-      } else {
-        return { input: '-' + state.input };
-      }
-    });
-  };
-  convertPercentage = () => {
-    this.setState(state => {
-      if(state.command === null) { return { input: '0' }; }
-    });
-  };
-  showResult = command => {
-    this.setState(state => {
-      let input = this.executeArithmetic(state.command, state.result, state.input);
-      return { input: `${input}`, result: `${input}`, command, newInput: true };
-    });
-  };
-
-  hideCalculator = e => {
-    if(e.target.className === MASK_CLASS_NAME) {
-      this.setState(() => ({ isCalculatorShow: false }));
-    }
-  };
-  showCalculator = () => {
-    this.setState(() => ({ isCalculatorShow: true }));
-  };
-
-  executeArithmetic(arithmetic, input1, input2) {
-    input1 = Number(input1);
-    input2 = Number(input2);
-    switch(arithmetic) {
-      case COMMAND_TEXT.get('ADD'):
-        return input1 + input2;
-      case COMMAND_TEXT.get('SUBTRACT'):
-        return input1 - input2;
-      case COMMAND_TEXT.get('MULTIPLY'):
-        return input1 * input2;
-      case COMMAND_TEXT.get('DIVIDE'):
-        return input1 / input2;
-      default:
-        return input2;
-    }
-  }
-  isCommandArithmetic(command) {
-    switch(command) {
-      case COMMAND_TEXT.get('ADD'):
-      case COMMAND_TEXT.get('SUBTRACT'):
-      case COMMAND_TEXT.get('MULTIPLY'):
-      case COMMAND_TEXT.get('DIVIDE'):
-        return true;
-    }
-    return false;
+    return (
+      <CalculatorModal 
+        display={this.props.display}
+        onInput={this.props.onInput}
+        onReset={this.props.onReset}
+        onConvertSign={this.props.onConvertSign}
+        onAdd={this.props.onAdd}
+        onSubtract={this.props.onSubtract}
+        onMultiply={this.props.onMultiply}
+        onDivide={this.props.onDivide}
+        onEqual={this.props.onEqual}
+      />
+    );
   }
 }
 
-const MASK_CLASS_NAME = 'calculator-mask';
+const mapStateToProps = state => {
+  return {
+    display: state.calcCommands.input
+  };
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    onInput: input => dispatch({ type: ACTION_TYPES.ADD_INPUT, input }),
+    onReset: () => dispatch({ type: ACTION_TYPES.RESET }),
+    onConvertSign: () => dispatch({ type: ACTION_TYPES.CONVERT_SIGN }),
+    onAdd: () => dispatch({ type: ACTION_TYPES.ADD }),
+    onSubtract: () => dispatch({ type: ACTION_TYPES.SUBTRACT }),
+    onMultiply: () => dispatch({ type: ACTION_TYPES.MULTIPLY }),
+    onDivide: () => dispatch({ type: ACTION_TYPES.DIVIDE }),
+    onEqual: () => dispatch({ type: ACTION_TYPES.EQUAL })
+  };
+}
 
-export default CalculatorModalContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(CalculatorModalContainer);

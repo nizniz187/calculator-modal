@@ -22,7 +22,8 @@ module.exports = {
   resolve: {
     alias: {
       components: `${srcPath}/components`,
-      containers: `${srcPath}/containers`
+      containers: `${srcPath}/containers`,
+      store: `${srcPath}/store`
     }
   },
   module: {

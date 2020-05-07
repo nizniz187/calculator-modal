@@ -1,0 +1,32 @@
+.calc-btn {
+  display: inline-block;
+  padding: 5px;
+  width: 25%;
+}
+.calc-btn-size-double { width:50%; }
+
+.calc-btn > button {
+  border: none; border-radius: 25px;
+  font-size: 26px;
+  text-align: center; line-height: 50px;
+  outline: none;
+  width: 100%; min-width: 50px; height: 50px;
+}
+.calc-btn-color-gray > button {
+  color: black; background-color: #AFAFAF;
+}
+.calc-btn-color-gray > button:active {
+  background-color: #BBB;
+}
+.calc-btn-color-grayDark > button {
+  color: white; background-color: #333;
+}
+.calc-btn-color-grayDark > button:active {
+  background-color: #555;
+}
+.calc-btn-color-blueSky > button {
+  color: white; background-color: #3091FD;
+}
+.calc-btn-color-blueSky > button:active {
+  background-color: rgb(91, 167, 253);
+}

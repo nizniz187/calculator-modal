@@ -8,11 +8,15 @@
   width: 480px;
   z-index: 9999;
 }
+.calc-modal-mask {
+  position: fixed; left: 0; top: 0;
+  width: 100vw; height: 100vh;
+}
 .calc-modal-ctn {
   margin: 0 auto;
   width: 240px;
 }
-.calc-modal-input {
+.calc-modal-display {
   color: white;
   font-size: 60px;
   overflow: hidden;
