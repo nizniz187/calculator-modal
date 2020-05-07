@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CalculatorModal from 'components/CalculatorModal/CalculatorModal.js';
+import CalculatorModal from 'components/CalculatorModal.js';
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions.js';
 
 class CalculatorModalContainer extends React.Component {
@@ -57,7 +57,7 @@ const DEVICE_BREAK_POINT = 425;
 const mapStateToProps = state => {
   return {
     show: state.calcDisplay.isShow,
-    display: state.calcCommands.input,
+    display: state.calcCommands.display,
     isMovable: state.calcPosition.isMovable,
     position: { x: state.calcPosition.x, y: state.calcPosition.y }
   };

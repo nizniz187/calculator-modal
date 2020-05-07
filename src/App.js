@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CalculatorModalContainer from 'containers/CalculatorModalContainer/CalculatorModalContainer.js';
+import CalculatorModalContainer from 'containers/CalculatorModalContainer.js';
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions';
 
 class App extends React.Component {
