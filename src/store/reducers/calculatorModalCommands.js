@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions';
 
 const initialState = {
-  newInput: true,
+  isNewInput: true,
   input: '0',
   result: '0',
   arithmetic: null
@@ -33,12 +33,12 @@ const reducer = (state = initialState, action) => {
 };
 
 function addInputReducer(state, input = '') {
-  if(state.newInput === true) { 
+  if(state.isNewInput === true) { 
     if(input === '.') { 
-      return { ...state, input: '0.', newInput: false }; 
+      return { ...state, input: '0.', isNewInput: false }; 
     }
     else { 
-      return { ...state, input: input, newInput: false }; 
+      return { ...state, input: input, isNewInput: false }; 
     }
   }
 
@@ -66,9 +66,9 @@ function convertPercentageReducer(state) {
 };
 
 function showResultReducer(state, result, arithmetic) {
-  if(state.newInput === true) { return {...state, result: state.input, arithmetic}; }
+  if(state.isNewInput === true) { return {...state, result: state.input, arithmetic}; }
 
-  return { input: `${result}`, result: `${result}`, newInput: true, arithmetic };
+  return { input: `${result}`, result: `${result}`, isNewInput: true, arithmetic };
 };
 
 function executeArithmetic(arithmeticType, input1, input2) {
