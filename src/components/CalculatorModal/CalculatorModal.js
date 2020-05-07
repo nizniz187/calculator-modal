@@ -7,10 +7,11 @@ import './CalculatorModal.css';
 class CalculatorModal extends React.Component {
   render() {
     return (
-      <div className="calc-modal-mask"
+      <div id={this.props.maskId} className="calc-modal-mask"
+        onClick={this.props.onMaskClick}
         onMouseMove={this.getMoveHandler(this.props.onMouseMove)}
         onMouseUp={this.getMoveHandler(this.props.onMouseUp)}>
-        <div id={this.props.id} className="calc-modal" style={this.positionStyles}
+        <div id={this.props.modalId} className="calc-modal" style={this.positionStyles}
           onMouseDown={this.getMoveHandler(this.props.onMouseDown)}>
           <div className="calc-modal-ctn">
             <div className="calc-modal-display">{this.props.display}</div>

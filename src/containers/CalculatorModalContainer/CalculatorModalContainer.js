@@ -2,31 +2,37 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import CalculatorModal from 'components/CalculatorModal/CalculatorModal.js';
-import * as BUTTON_TEXT from 'components/CalculatorModal/settings/BUTTON_TEXT.js';
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions.js';
 
 class CalculatorModalContainer extends React.Component {
   render() {
-    return (
-      <CalculatorModal
-        id={MODAL_ID}
-        isMovable={this.props.isMovable}
-        position={this.props.position}
-        onMouseDown={this.props.onMoveStart}
-        onMouseMove={this.props.onMove}
-        onMouseUp={this.props.onMoveEnd}
+    if(this.props.show === true) {
+      return (
+        <CalculatorModal
+          modalid={MODAL_ID}
+          maskId={MASK_ID}
+          onMaskClick={this.props.onMaskClick}
 
-        display={this.formattedDisplay}
-        onInput={this.props.onInput}
-        onReset={this.props.onReset}
-        onConvertSign={this.props.onConvertSign}
-        onAdd={this.props.onAdd}
-        onSubtract={this.props.onSubtract}
-        onMultiply={this.props.onMultiply}
-        onDivide={this.props.onDivide}
-        onEqual={this.props.onEqual}
-      />
-    );
+          isMovable={this.props.isMovable}
+          position={this.props.position}
+          onMouseDown={this.props.onMoveStart}
+          onMouseMove={this.props.onMove}
+          onMouseUp={this.props.onMoveEnd}
+
+          display={this.formattedDisplay}
+          onInput={this.props.onInput}
+          onReset={this.props.onReset}
+          onConvertSign={this.props.onConvertSign}
+          onAdd={this.props.onAdd}
+          onSubtract={this.props.onSubtract}
+          onMultiply={this.props.onMultiply}
+          onDivide={this.props.onDivide}
+          onEqual={this.props.onEqual}
+        />
+      );
+    } else {
+      return null;
+    }
   }
   componentDidMount() {
     window.addEventListener('resize', this.props.onWindowResize);
@@ -43,11 +49,13 @@ class CalculatorModalContainer extends React.Component {
   }
 }
 
+const MASK_ID = 'calculatorMask';
 const MODAL_ID = 'calculatorModal';
 const DEVICE_BREAK_POINT = 425;
 
 const mapStateToProps = state => {
   return {
+    show: state.calcDisplay.isShow,
     display: state.calcCommands.input,
     isMovable: state.calcPosition.isMovable,
     position: { x: state.calcPosition.x, y: state.calcPosition.y }
@@ -55,6 +63,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    onMaskClick: e => {
+      if(e.target.id !== MASK_ID) { return };
+
+      dispatch({ type:ACTION_TYPES.HIDE })
+    },
     onInput: input => { dispatch({ type: ACTION_TYPES.ADD_INPUT, input }) },
     onReset: () => dispatch({ type: ACTION_TYPES.RESET }),
     onConvertSign: () => dispatch({ type: ACTION_TYPES.CONVERT_SIGN }),
