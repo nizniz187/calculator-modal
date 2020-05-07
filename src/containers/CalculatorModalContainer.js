@@ -57,7 +57,7 @@ const DEVICE_BREAK_POINT = 425;
 const mapStateToProps = state => {
   return {
     show: state.calcDisplay.isShow,
-    display: state.calcCommands.display,
+    display: state.calcCommands.input,
     isMovable: state.calcPosition.isMovable,
     position: { x: state.calcPosition.x, y: state.calcPosition.y }
   };

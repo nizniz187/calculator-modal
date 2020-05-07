@@ -6,7 +6,8 @@ const initialState = {
   isNewInput: true,
   input: '0',
   result: '0',
-  arithmetic: null
+  arithmetic: null,
+  percentage: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,7 +51,6 @@ function addInputReducer(state, input = '') {
 
   return { ...state, input: state.input += input };
 }
-
 function convertSignReducer(state) {
   if(state.input === '0') { return state; }
 
@@ -59,17 +59,23 @@ function convertSignReducer(state) {
   } else {
     return { ...state, input: '-' + state.input };
   }
-};
-/* todo */
+}
 function convertPercentageReducer(state) {
-  return state;
-};
-
+  let percentage = executeArithmetic(ACTION_TYPES.DIVIDE, state.input, 100);
+  let result = executeArithmetic(ACTION_TYPES.MULTIPLY, state.result, percentage);
+  return { ...state, input: `${result}`, percentage: state.input }
+}
 function showResultReducer(state, result, arithmetic) {
-  if(state.isNewInput === true) { return {...state, result: state.input, arithmetic}; }
+  if(state.isNewInput === true) {
+    return {...state, result: state.input, arithmetic}; 
+  }
 
-  return { input: `${result}`, result: `${result}`, isNewInput: true, arithmetic };
-};
+  return { 
+    ...state, 
+    input: `${result}`, result: `${result}`, 
+    isNewInput: true, arithmetic 
+  };
+}
 
 function executeArithmetic(arithmeticType, input1, input2) {
   input1 = new BigNumber(input1);
