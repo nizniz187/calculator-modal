@@ -40,6 +40,7 @@
   font-size: 26px;
   text-align: center; line-height: 50px;
   outline: none;
+  padding: 0;
   width: 100%; min-width: 50px; height: 50px;
 }
 .calc-modal-btn.btn-color-gray > button {
