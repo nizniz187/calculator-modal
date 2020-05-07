@@ -31,19 +31,14 @@
 .calc-btn-color-blueSky > button:active {
   background-color: rgb(91, 167, 253);
 }
-.calc-modal-mask {
-  position: fixed; left: 0; top: 0;
-  width: 100vw; height: 100vh;
-}
-
 .calc-modal, .calc-modal * { box-sizing: border-box; }
 .calc-modal {
   background: linear-gradient(180deg, #84BAFF 0%, #0B0E1C 100%);
   box-shadow: 0px 0px 5px 3px rgba(179,179,179,1);
   padding: 10px; padding-top: 50px;
-  position: fixed; top: calc(50vh - 240px); left: calc(50vw - 240px);
+  position: fixed; top: 50%; left: calc(50% - 240px);
   user-select: none;
-  width: 480px; max-height: 100vh;
+  width: 480px; max-height: 50%;
   z-index: 9999;
 }
 .calc-modal-ctn {
@@ -62,50 +57,17 @@
   margin: 0 auto;
   width: 100%;
 }
-.calc-modal-btn {
-  display: inline-block;
-  padding: 5px;
-  width: 25%;
-}
-.calc-modal-btn.btn-size-double { width:50%; }
-
-.calc-modal-btn > button {
-  border: none; border-radius: 25px;
-  font-size: 26px;
-  text-align: center; line-height: 50px;
-  outline: none;
-  padding-left: 0; padding-right: 0;
-  width: 100%; min-width: 50px; height: 50px;
-}
-.calc-modal-btn.btn-color-gray > button {
-  color: black; background-color: #AFAFAF;
-}
-.calc-modal-btn.btn-color-gray > button:active {
-  background-color: #BBB;
-}
-.calc-modal-btn.btn-color-grayDark > button {
-  color: white; background-color: #333;
-}
-.calc-modal-btn.btn-color-grayDark > button:active {
-  background-color: #555;
-}
-.calc-modal-btn.btn-color-blueSky > button {
-  color: white; background-color: #3091FD;
-}
-.calc-modal-btn.btn-color-blueSky > button:active {
-  background-color: rgb(91, 167, 253);
-}
 
 @media screen and (max-width: 768px) {
   .calc-modal {
-    left: calc(50vw - 180px);
+    left: calc(50% - 180px);
     width: 360px; 
   }
 }
 @media screen and (max-width: 425px) {
   .calc-modal { 
-    width: 100%; max-height: 50vh; 
+    width: 100%; max-height: 50%; 
     overflow: auto;
-    top: 50vh; left: 0;
+    top: 50%; left: 0;
   }
 }
