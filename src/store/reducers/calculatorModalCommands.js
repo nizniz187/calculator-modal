@@ -1,31 +1,42 @@
+/**
+ * @module calculatorModalCommands
+ * Reducer for claculator operations.
+ */
+
 import BigNumber from 'bignumber.js';
 
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions';
 
 const initialState = {
-  isNewInput: true,
-  input: '0',
-  result: '0',
-  arithmetic: null
+  isNewInput: true, // Should the next input be a new one or combined with the old one.
+  input: '0', // Current input.
+  result: '0',  // Last result.
+  arithmetic: null  // Arithmetic mothod using (+-*/).
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    /* Digits / dot */
     case ACTION_TYPES.ADD_INPUT:
       return addInputReducer(state, action.input);
+    /* Arithmetics (+-x/) */
     case ACTION_TYPES.ADD:
     case ACTION_TYPES.SUBTRACT:
     case ACTION_TYPES.MULTIPLY:
     case ACTION_TYPES.DIVIDE:
       let result = executeArithmetic(state.arithmetic, state.result, state.input);
       return showResultReducer(state, result, action.type);
+    /* Equal */
     case ACTION_TYPES.EQUAL:
       result = executeArithmetic(state.arithmetic, state.result, state.input);
       return showResultReducer(state, result, null);
+    /* AC */
     case ACTION_TYPES.RESET:
       return initialState;
+    /* +/- */
     case ACTION_TYPES.CONVERT_SIGN:
       return convertSignReducer(state);
+    /* % */
     case ACTION_TYPES.CONVERT_PERCENTAGE:
       return convertPercentageReducer(state);
   }
@@ -34,12 +45,8 @@ const reducer = (state = initialState, action) => {
 
 function addInputReducer(state, input = '') {
   if(state.isNewInput === true) { 
-    if(input === '.') { 
-      return { ...state, input: '0.', isNewInput: false }; 
-    }
-    else { 
-      return { ...state, input: input, isNewInput: false }; 
-    }
+    if(input === '.') { input === '0.'; }    
+    return { ...state, input: input, isNewInput: false }; 
   }
 
   if(state.input.length >= 7) { return state; }
@@ -76,6 +83,14 @@ function showResultReducer(state, result, arithmetic) {
   };
 }
 
+/**
+ * Execute arithmetic with given arithmetic type & inputs,
+ *  using BigNumber object to avoid the precision problem of floating point calculation.
+ * @param {string} arithmeticType - Arithmetic type.
+ * @param {string} input1 - 1st input.
+ * @param {string} input2 - 2nd input.
+ * @returns {BigNumber} Result.
+ */
 function executeArithmetic(arithmeticType, input1, input2) {
   input1 = new BigNumber(input1);
   input2 = new BigNumber(input2);

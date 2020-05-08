@@ -1,3 +1,8 @@
+/**
+ * @module calculatorModalActions
+ * Action names for claculator modal reducers.
+ */
+
 export const ADD_INPUT = 'ADD_INPUT';
 export const RESET = 'RESET';
 export const CONVERT_SIGN = 'SIGN';

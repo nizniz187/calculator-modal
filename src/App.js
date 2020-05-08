@@ -17,6 +17,7 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
+    /* Show calculator modal on button click. */
     showCalculatorModal: () => dispatch({ type: ACTION_TYPES.SHOW })
   };
 };

@@ -12,6 +12,9 @@ class CalculatorButton extends React.Component {
     );
   }
 
+  /**
+   * Pass text property as an argument on click.
+   */
   clickHandler = () => {
     if(typeof this.props.onClick === 'function') {
       this.props.onClick(this.props.text);

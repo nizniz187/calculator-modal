@@ -13,12 +13,14 @@ class CalculatorModalContainer extends React.Component {
           maskId={MASK_ID}
           onMaskClick={this.props.onMaskClick}
 
+          /* Properties for modal position & moving. */
           isMovable={this.props.isMovable}
           position={this.props.position}
           onMoveStart={this.props.onMoveStart}
           onMove={this.props.onMove}
           onMoveEnd={this.props.onMoveEnd}
 
+          /* Properties for calculator operation. */
           display={this.formattedDisplay}
           onInput={this.props.onInput}
           onReset={this.props.onReset}
@@ -36,13 +38,17 @@ class CalculatorModalContainer extends React.Component {
     }
   }
   componentDidMount() {
+    /* Bind window resize event for updating the ability of modal moving. */
     window.addEventListener('resize', this.props.onWindowResize);
-    this.props.onWindowResize(DEVICE_BREAK_POINT);
+    this.props.onWindowResize(DEVICE_BREAK_POINT); // Update first on mount.
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.props.onWindowResize);
   }
 
+  /**
+   * Get formatted display for up to 7 characters.
+   */
   get formattedDisplay() { 
     if(this.props.display.length >= 7) { return this.props.display.substring(0, 7); }
     
@@ -52,6 +58,7 @@ class CalculatorModalContainer extends React.Component {
 
 const MASK_ID = 'calculatorMask';
 const MODAL_ID = 'calculatorModal';
+/* Breakpoint for modal movability. */
 const DEVICE_BREAK_POINT = 425;
 
 const mapStateToProps = state => {
@@ -64,11 +71,14 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
+    /* Hide modal on modal mask clicked. */
     onMaskClick: e => {
       if(e.target.id !== MASK_ID) { return };
 
       dispatch({ type:ACTION_TYPES.HIDE })
     },
+
+    /* Dispatchers for calculator operations. */
     onInput: input => { dispatch({ type: ACTION_TYPES.ADD_INPUT, input }) },
     onReset: () => dispatch({ type: ACTION_TYPES.RESET }),
     onConvertSign: () => dispatch({ type: ACTION_TYPES.CONVERT_SIGN }),
@@ -78,6 +88,8 @@ const mapDispatchToProps = dispatch => {
     onMultiply: () => dispatch({ type: ACTION_TYPES.MULTIPLY }),
     onDivide: () => dispatch({ type: ACTION_TYPES.DIVIDE }),
     onEqual: () => dispatch({ type: ACTION_TYPES.EQUAL }),
+    
+    /* Dispatchers for modal moving. */
     onWindowResize: () => {
       dispatch({ 
         type: ACTION_TYPES.WINDOW_RESIZE, 
@@ -100,6 +112,11 @@ const mapDispatchToProps = dispatch => {
     onMoveEnd: () => dispatch({ type: ACTION_TYPES.MOVE_END })
   };
 }
+/**
+ * Get the coordinates user clicked or touched.
+ * @param {MouseEvent | TouchEvent} e 
+ * @returns {Object} User activity position object with x & y properties.
+ */
 const getUserPosition = e => {
   if(e.changedTouches instanceof TouchList && e.changedTouches.length > 0) {
     return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };

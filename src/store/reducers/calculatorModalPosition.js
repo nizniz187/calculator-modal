@@ -1,3 +1,7 @@
+/**
+ * @module calculatorModalPosition
+ * Reducer for claculator modal position & moving.
+ */
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions';
 
 const initialState = { 
@@ -20,6 +24,15 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
+/**
+ * Reducer for updating modal movability by comparing 
+ *  the window width with given breakpoint.
+ *  - Window inner width > breakpoint: movable.
+ *  - Window inner width <= breakpoint: unmovable.
+ * @param {Object} state - Current state object.
+ * @param {*} breakPoint - Breakpoint of movability.
+ * @returns {Object} New state object.
+ */
 function windowResizeReducer(state, breakPoint) {
   if(typeof breakPoint === 'number' && !isNaN(breakPoint)) {
     return { ...state, isMovable: innerWidth > breakPoint };
@@ -27,6 +40,13 @@ function windowResizeReducer(state, breakPoint) {
     return state;
   }
 }
+/**
+ * Reducer for modal move start (mousedown / touchstart).
+ * @param {Object} state - Current state object.
+ * @param {Object} userPosition - User activity position with x & y properties.
+ * @param {Object} modalPosition - Modal position with x & y properties.
+ * @returns {Object} New state object.
+ */
 function moveStartReducer(state, userPosition, modalPosition) {
   if(!userPosition || typeof userPosition !== 'object') { return state; }
   if(!modalPosition || typeof modalPosition !== 'object') { return state; }
@@ -38,6 +58,12 @@ function moveStartReducer(state, userPosition, modalPosition) {
     isMoving: true
   };
 }
+/**
+ * Reducer for modal moving (mousemove / touchmove).
+ * @param {Object} state - Current state object.
+ * @param {Object} userPosition - User activity position with x & y properties.
+ * @returns {Object} New state object.
+ */
 function moveReducer(state, userPosition) {
   if(state.isMovable !== true || state.isMoving !== true) { return state; }
   if(!userPosition || typeof userPosition !== 'object') { return state; }
@@ -48,6 +74,11 @@ function moveReducer(state, userPosition) {
     y: userPosition.y - state.offsetY
   };
 }
+/**
+ * Reducer for modal move end (mouseup / touchend / touchcancel).
+ * @param {Object} state - Current state object.
+ * @returns {Object} New state object.
+ */
 function moveEndReducer(state) {
   if(state.isMovable !== true || state.isMoving !== true) { return state; }
   

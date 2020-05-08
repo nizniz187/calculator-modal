@@ -1,3 +1,8 @@
+/**
+ * @module BUTTON_TEXT
+ * Settings for calculator modal button text.
+ */
+
 export const INPUT_0 = '0';
 export const INPUT_1 = '1';
 export const INPUT_2 = '2';

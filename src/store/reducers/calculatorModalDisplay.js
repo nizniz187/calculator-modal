@@ -1,3 +1,7 @@
+/**
+ * @module calculatorModalDisplay
+ * Reducer for claculator modal display (show / hide).
+ */
 import * as ACTION_TYPES from 'store/actions/calculatorModalActions';
 
 const initialState = { 
