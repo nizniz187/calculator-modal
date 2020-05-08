@@ -75,6 +75,7 @@ function showResultReducer(state, result, arithmetic) {
   if(state.isNewInput === true) {
     return {...state, result: state.input, arithmetic}; 
   }
+  if(!isInputValid(result)) { result = 'ERROR'; }
 
   return { 
     ...state, 
@@ -92,6 +93,8 @@ function showResultReducer(state, result, arithmetic) {
  * @returns {BigNumber} Result.
  */
 function executeArithmetic(arithmeticType, input1, input2) {
+  if(!isInputValid(input1)) { input1 = 0; }
+  if(!isInputValid(input2)) { input2 = 0; }
   input1 = new BigNumber(input1);
   input2 = new BigNumber(input2);
   let result = null;
@@ -112,6 +115,16 @@ function executeArithmetic(arithmeticType, input1, input2) {
       result = input2;
   }
   return result;
+}
+
+/**
+ * Check if the input can be converted to BigNumber object & is finite.
+ * @param {*} input
+ * @returns {boolean} Valid or not.
+ */
+function isInputValid(input) {
+  let i = new BigNumber(input);
+  return !i.isNaN() && i.isFinite();
 }
 
 export default reducer;
